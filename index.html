@@ -48,10 +48,11 @@
     }
     .fade-in-section.is-visible { opacity: 1; transform: none; }
 
+    /* 実画像に差し替え（外観） */
     .hero-bg {
-      /* 画像パスをサンプル画像に変更 */
-      background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+        url('assets/img/exterior.png');
       background-size: cover;
       background-position: center;
     }
@@ -82,9 +83,13 @@
   <!-- Header -->
   <header class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="header">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="#" class="text-2xl font-black tracking-tighter text-brand-dark flex items-center gap-2 hover:opacity-80 transition">
-        <i class="fa-solid fa-shapes text-brand-orange"></i>
-        MIKOSHIYA
+      <a href="#" class="text-2xl font-black tracking-tighter text-brand-dark flex items-center gap-3 hover:opacity-80 transition">
+        <!-- ロゴ：ファイル名をここに合わせて置いてね -->
+        <img src="assets/img/logo.png" alt="MIKOSHIYA ロゴ" class="h-8 w-auto hidden sm:block">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-shapes text-brand-orange"></i>
+          MIKOSHIYA
+        </span>
       </a>
 
       <!-- Desktop Nav -->
@@ -142,12 +147,17 @@
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
         ここから、<br class="md:hidden">物語が始まる。
       </h1>
-      <p class="text-lg md:text-2xl mb-6 font-medium leading-relaxed opacity-95 drop-shadow-md">
+      <p class="text-lg md:text-2xl mb-4 font-medium leading-relaxed opacity-95 drop-shadow-md">
         新安城駅近く。<br class="md:hidden">ただのコワーキングではなく、<br>
         つくる人が集まり、熱量が交差する「制作基地」。
       </p>
 
-      <p class="mt-4 text-sm md:text-base text-white/90 bg-black/30 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
+      <!-- ① 初回無料 を追加 -->
+      <p class="mt-2 text-sm md:text-base text-white/95 bg-brand-orange/60 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
+        🎉 初回は無料（はじめての方はLINEで「初回」と送ってください）
+      </p>
+
+      <p class="mt-3 text-sm md:text-base text-white/90 bg-black/30 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
         新安城駅 徒歩3分｜08:00〜17:00｜ドロップイン 30分210円（最大1,890円）
       </p>
 
@@ -188,19 +198,20 @@
           </div>
 
           <div class="flex items-start gap-4 mt-8">
-            <div class="w-12 h-12 rounded-full bg-brand-orange flex items-center justify-center text-white shrink-0 shadow-md transform -rotate-6">
-              <i class="fa-solid fa-cat text-2xl"></i>
+            <!-- ④ カツグくんは🦉 -->
+            <div class="w-12 h-12 rounded-full bg-brand-orange flex items-center justify-center text-white shrink-0 shadow-md transform -rotate-6 text-2xl">
+              🦉
             </div>
             <div class="bubble bg-white p-5 shadow-sm border border-gray-100 flex-1 hover:shadow-md transition">
-              <p class="text-sm font-bold text-brand-orange mb-1">カツグくん</p>
+              <p class="text-sm font-bold text-brand-orange mb-1">カツグくん（🦉）</p>
               <p class="text-sm text-gray-700">「最初は誰でもドキドキするよね！でも、ここに来たら『やるぞ！』って気持ちになれる。一緒に一歩、カツグ（担ぐ）よ！」</p>
             </div>
           </div>
         </div>
 
         <div class="md:w-1/2 order-1 md:order-2">
-          <!-- サンプル画像に変更 -->
-          <img src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=800&q=80" alt="コワーキングエリア" class="rounded-2xl shadow-2xl w-full h-80 md:h-[500px] object-cover hover:scale-[1.02] transition duration-500">
+          <!-- 実画像：コワーキングエリア -->
+          <img src="assets/img/cowork_area.png" alt="コワーキングエリア" class="rounded-2xl shadow-2xl w-full h-80 md:h-[500px] object-cover hover:scale-[1.02] transition duration-500">
         </div>
       </div>
     </section>
@@ -234,8 +245,8 @@
         </div>
 
         <div class="md:w-1/2">
-          <!-- サンプル画像に変更 -->
-          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80" alt="ミーティングルーム・作業エリア" class="rounded-2xl shadow-2xl w-full h-80 md:h-[500px] object-cover hover:scale-[1.02] transition duration-500">
+          <!-- 実画像：ミーティングルーム(コワーキングスタイル) -->
+          <img src="assets/img/meeting_cowork.png" alt="ミーティングルーム・作業エリア" class="rounded-2xl shadow-2xl w-full h-80 md:h-[500px] object-cover hover:scale-[1.02] transition duration-500">
         </div>
       </div>
     </section>
@@ -303,7 +314,11 @@
         </table>
       </div>
 
-      <p class="text-center text-xs text-gray-500 mt-6">※月額・オプション等はLINEでお問い合わせください。</p>
+      <!-- ① 初回無料の補足 -->
+      <p class="text-center text-sm text-brand-dark mt-6">
+        🎉 初回は無料（LINEで「初回」と送ってください）
+      </p>
+      <p class="text-center text-xs text-gray-500 mt-2">※月額・オプション等はLINEでお問い合わせください。</p>
     </div>
   </section>
 
@@ -368,8 +383,8 @@
       </div>
 
       <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <!-- サンプル画像に変更 -->
-        <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80" alt="店内全体" class="rounded-2xl shadow-xl w-full h-80 md:h-[420px] object-cover hover:shadow-2xl transition duration-500">
+        <!-- 実画像：店内全体 -->
+        <img src="assets/img/inside_all.png" alt="店内全体" class="rounded-2xl shadow-xl w-full h-80 md:h-[420px] object-cover hover:shadow-2xl transition duration-500">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-brand-orange/30 transition hover:bg-orange-50/20">
@@ -465,7 +480,11 @@
             <i class="fa-solid fa-car text-brand-orange mt-1 mr-3 w-5"></i>
             <div>
               <p class="font-bold">お車でお越しの方</p>
-              <p class="text-gray-600">近隣のコインパーキングをご利用ください（提携駐車場はございません）。</p>
+              <!-- ② 駐車場あり（要連絡）に修正 -->
+              <p class="text-gray-600">
+                駐車場があります（台数に限りあり）。<br>
+                お車の方は事前にLINEでご連絡ください。
+              </p>
             </div>
           </div>
 
@@ -561,8 +580,9 @@
             <span>Q. 駐車場はありますか？</span>
             <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
           </summary>
+          <!-- ② 駐車場あり（要連絡）に修正 -->
           <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
-            A. 専用駐車場はございません。近隣のコインパーキングをご利用ください。
+            A. 駐車場があります（台数に限りあり）。お車の方は事前にLINEでご連絡ください。
           </div>
         </details>
       </div>
@@ -573,9 +593,14 @@
   <footer id="contact" class="bg-brand-dark text-white pt-20 pb-10">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-6">お問い合わせ</h2>
-      <p class="text-gray-400 mb-8 max-w-xl mx-auto">
+      <p class="text-gray-400 mb-6 max-w-xl mx-auto">
         ご質問、見学の予約、利用申し込みは公式LINEから受け付けています。<br>
         「こんな使い方はできる？」「今日の空き状況は？」など、お気軽にメッセージをください。
+      </p>
+
+      <!-- ① 初回無料をここにも -->
+      <p class="text-white/90 mb-8">
+        🎉 初回は無料（LINEで「初回」と送ってください）
       </p>
 
       <a href="https://lin.ee/MV1fpHH" target="_blank" rel="noopener"
