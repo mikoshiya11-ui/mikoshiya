@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIKOSHIYA（ミコシヤ）| 新安城の物語が生まれるコワーキング・制作基地</title>
+  <meta name="description" content="愛知県安城市・新安城駅近くのコワーキングスペース「MIKOSHIYA」。動画編集、AI活用、デザインなど「つくる人」が集まる制作基地です。Wi-Fi・電源完備。初心者もプロも、あなたの新しい物語をここから始めませんか？">
+
+  <!-- Fonts: Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Icons: FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans JP"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              // 会社カラー（えんじ）
+              orange: '#7A1E2C',
+              light: '#FFF3E0',
+              dark: '#1A202C',
+              gray: '#4A5568',
+              accent: '#FFB74D'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      will-change: opacity, transform;
+    }
+    .fade-in-section.is-visible { opacity: 1; transform: none; }
+
+    .hero-bg {
+      /* 画像パスをサンプル画像に変更 */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .bubble {
+      position: relative;
+      background: #fff;
+      border-radius: .4em;
+    }
+    .bubble:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right-color: #fff;
+      border-left: 0;
+      margin-top: -10px;
+      margin-left: -10px;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-800 bg-orange-50/30">
+
+  <!-- Header -->
+  <header class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="header">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-2xl font-black tracking-tighter text-brand-dark flex items-center gap-2 hover:opacity-80 transition">
+        <i class="fa-solid fa-shapes text-brand-orange"></i>
+        MIKOSHIYA
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex gap-6 items-center font-medium text-sm lg:text-base">
+        <a href="#story" class="hover:text-brand-orange transition relative group">
+          物語
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#price" class="hover:text-brand-orange transition relative group">
+          料金
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#reviews" class="hover:text-brand-orange transition relative group">
+          クチコミ
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#flow" class="hover:text-brand-orange transition relative group">
+          利用の流れ
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#access" class="hover:text-brand-orange transition relative group">
+          アクセス
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full"></span>
+        </a>
+        <a href="#contact" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full transition shadow-md flex items-center gap-2 transform hover:-translate-y-0.5">
+          <i class="fa-brands fa-line text-lg"></i> 問い合わせ
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-btn" class="md:hidden text-2xl text-brand-dark focus:outline-none p-2" aria-label="メニューを開く">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full left-0 top-full shadow-lg transition-all duration-300 origin-top">
+      <div class="flex flex-col p-4 gap-4">
+        <a href="#story" class="mobile-link block py-2 border-b border-gray-100 hover:bg-gray-50 px-2 rounded">物語</a>
+        <a href="#price" class="mobile-link block py-2 border-b border-gray-100 hover:bg-gray-50 px-2 rounded">料金</a>
+        <a href="#reviews" class="mobile-link block py-2 border-b border-gray-100 hover:bg-gray-50 px-2 rounded">クチコミ</a>
+        <a href="#flow" class="mobile-link block py-2 border-b border-gray-100 hover:bg-gray-50 px-2 rounded">利用の流れ</a>
+        <a href="#access" class="mobile-link block py-2 border-b border-gray-100 hover:bg-gray-50 px-2 rounded">アクセス</a>
+        <a href="#contact" class="mobile-link block bg-green-500 text-white text-center py-3 rounded-lg font-bold shadow hover:bg-green-600 transition">
+          <i class="fa-brands fa-line mr-1"></i> LINEで問い合わせる
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-bg h-screen min-h-[600px] flex items-center justify-center text-white relative px-4">
+    <div class="text-center max-w-4xl fade-in-section is-visible">
+      <p class="text-brand-accent font-bold mb-4 tracking-widest text-lg md:text-xl drop-shadow-md">SHIN-ANJO COWORKING SPACE</p>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
+        ここから、<br class="md:hidden">物語が始まる。
+      </h1>
+      <p class="text-lg md:text-2xl mb-6 font-medium leading-relaxed opacity-95 drop-shadow-md">
+        新安城駅近く。<br class="md:hidden">ただのコワーキングではなく、<br>
+        つくる人が集まり、熱量が交差する「制作基地」。
+      </p>
+
+      <p class="mt-4 text-sm md:text-base text-white/90 bg-black/30 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
+        新安城駅 徒歩3分｜08:00〜17:00｜ドロップイン 30分210円（最大1,890円）
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-4 justify-center mt-10">
+        <a href="#contact" class="bg-green-500 hover:bg-green-600 text-white text-lg font-bold px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition flex items-center justify-center gap-2 group">
+          <i class="fa-brands fa-line text-2xl group-hover:rotate-12 transition"></i> LINEで予約・相談
+        </a>
+        <a href="#story" class="bg-white/10 backdrop-blur hover:bg-white/20 text-white border border-white/50 text-lg font-bold px-8 py-4 rounded-full transition flex items-center justify-center hover:border-white">
+          もっと詳しく知る
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
+      <i class="fa-solid fa-chevron-down text-2xl"></i>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <div id="story" class="py-20 overflow-hidden">
+
+    <!-- Chapter 1 -->
+    <section class="container mx-auto px-4 mb-32 fade-in-section">
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2 order-2 md:order-1">
+          <span class="text-brand-orange font-bold text-sm tracking-widest mb-2 block">CHAPTER 01</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">はじまり。<br>まだ何者でもないあなたへ。</h2>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            「動画編集をやってみたい」「AIで新しい働き方を探したい」「自分のイラストを世に出したい」。<br>
+            そんな想いを抱えながら、家のデスクやカフェの片隅で、一人悩んではいませんか？
+          </p>
+          <div class="bg-white border-l-4 border-brand-orange p-6 shadow-md rounded-r-lg mb-8">
+            <h3 class="text-xl font-bold mb-3 text-brand-dark">物語は、完成してから始まるんじゃない。</h3>
+            <p class="text-gray-600">
+              誰だって最初は初心者です。最初の一歩が踏み出せない日もある。<br>
+              けれど、物語が動き出すのは「やる」と決めて動き出した瞬間です。
+            </p>
+          </div>
+
+          <div class="flex items-start gap-4 mt-8">
+            <div class="w-12 h-12 rounded-full bg-brand-orange flex items-center justify-center text-white shrink-0 shadow-md transform -rotate-6">
+              <i class="fa-solid fa-cat text-2xl"></i>
+            </div>
+            <div class="bubble bg-white p-5 shadow-sm border border-gray-100 flex-1 hover:shadow-md transition">
+              <p class="text-sm font-bold text-brand-orange mb-1">カツグくん</p>
+              <p class="text-sm text-gray-700">「最初は誰でもドキドキするよね！でも、ここに来たら『やるぞ！』って気持ちになれる。一緒に一歩、カツグ（担ぐ）よ！」</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:w-1/2 order-1 md:order-2">
+          <!-- サンプル画像に変更 -->
+          <img src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=800&q=80" alt="コワーキングエリア" class="rounded-2xl shadow-2xl w-full h-80 md:h-[500px] object-cover hover:scale-[1.02] transition duration-500">
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 2 -->
+    <section class="container mx-auto px-4 mb-32 fade-in-section">
+      <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+        <div class="md:w-1/2">
+          <span class="text-brand-orange font-bold text-sm tracking-widest mb-2 block">CHAPTER 02</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">交差。<br>つくる人が、つながる場所。</h2>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            静かに勉強するだけの自習室とは、少し違います。<br>
+            MIKOSHIYAには、動画・デザイン・AIなど、つくる人が集まります。
+          </p>
+          <h3 class="text-2xl font-bold mb-4 text-brand-dark">制作する人の空気がある。</h3>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            ここには「何かをつくり出す人」特有の空気が流れています。<br>
+            一人で黙々と作業する時間も、ふと顔を上げた時に仲間がいる安心感も。
+          </p>
+
+          <div class="flex items-start gap-4 mt-8 flex-row-reverse">
+            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-white shrink-0 shadow-md">
+              <i class="fa-solid fa-user-tie text-xl"></i>
+            </div>
+            <div class="bubble bg-white p-5 shadow-sm border border-gray-100 flex-1 relative hover:shadow-md transition">
+              <div class="absolute -right-2 top-1/2 w-0 h-0 border-t-8 border-t-transparent border-l-8 border-l-white border-b-8 border-b-transparent transform -translate-y-1/2"></div>
+              <p class="text-sm font-bold text-gray-700 mb-1">テンチョー</p>
+              <p class="text-sm text-gray-700">「神輿みたいに熱気が集まる場所。でも集中したい時は、ちゃんと集中できる。程よい距離感を大切にしてます。」</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:w-1/2">
+          <!-- サンプル画像に変更 -->
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80" alt="ミーティングルーム・作業エリア" class="rounded-2xl shadow-2xl w-full h-80 md:h-[500px] object-cover hover:scale-[1.02] transition duration-500">
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 3 -->
+    <section class="container mx-auto px-4 fade-in-section">
+      <div class="bg-brand-dark text-white rounded-3xl p-8 md:p-16 text-center relative overflow-hidden shadow-2xl">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <i class="fa-solid fa-network-wired absolute -top-10 -left-10 text-9xl animate-pulse" style="animation-duration: 4s;"></i>
+          <i class="fa-solid fa-pen-nib absolute -bottom-10 -right-10 text-9xl"></i>
+        </div>
+
+        <span class="text-brand-orange font-bold text-sm tracking-widest mb-4 block">CHAPTER 03</span>
+        <h2 class="text-3xl md:text-5xl font-bold mb-8">動き出す。<br>小さな挑戦が、物語になる。</h2>
+
+        <div class="max-w-2xl mx-auto mb-10">
+          <p class="text-gray-300 text-lg leading-relaxed mb-6">
+            初投稿、初受注、初コラボ。<br>
+            小さな「初めて」が、やがて大きな自信になる。<br>
+            あなたの挑戦という「神輿」を、一緒に担ぎ上げる仲間です。
+          </p>
+          <p class="text-xl md:text-2xl font-bold text-white">あなたの物語は、ここから動き出す。</p>
+        </div>
+
+        <a href="#contact" class="inline-block bg-brand-orange hover:bg-red-800 text-white text-lg font-bold px-10 py-5 rounded-full shadow-lg transform hover:scale-105 transition group">
+          まずは見学・ドロップインしてみる
+          <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Price (Drop-in only) -->
+  <section id="price" class="py-20 bg-white fade-in-section">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <span class="text-brand-orange font-bold tracking-widest">PRICE</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mt-2">料金</h2>
+        <p class="text-gray-600 mt-4">まずはドロップインで、お気軽に。</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto overflow-x-auto shadow-xl rounded-xl">
+        <table class="w-full text-left border-collapse min-w-[600px]">
+          <thead>
+            <tr class="bg-gray-50 border-b-2 border-brand-orange">
+              <th class="p-4 font-bold text-gray-700 w-1/4">プラン</th>
+              <th class="p-4 font-bold text-gray-700 w-1/4">料金（税込）</th>
+              <th class="p-4 font-bold text-gray-700">対象・特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b hover:bg-orange-50/30 transition bg-white">
+              <td class="p-6 font-bold text-brand-dark">
+                <i class="fa-regular fa-clock text-brand-orange mr-2"></i>ドロップイン
+              </td>
+              <td class="p-6">
+                <div class="font-bold text-lg">30分 210円</div>
+                <div class="text-sm text-gray-500">1日最大 1,890円</div>
+              </td>
+              <td class="p-6 text-gray-600">
+                短時間の利用やスキマ時間に。<br>Wi-Fi・電源完備。集中できる制作環境。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-center text-xs text-gray-500 mt-6">※月額・オプション等はLINEでお問い合わせください。</p>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="py-20 bg-gray-50 fade-in-section">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-10">
+        <span class="text-brand-orange font-bold tracking-widest">REVIEWS</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mt-2">Googleクチコミ</h2>
+
+        <div class="mt-4 inline-flex items-center gap-3 bg-white border border-orange-100 text-brand-dark px-5 py-3 rounded-full shadow-sm">
+          <div class="text-yellow-400 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <div class="font-bold">★5.0</div>
+          <div class="text-gray-600 text-sm">（11件）</div>
+        </div>
+
+        <p class="text-gray-600 mt-4">実際にご利用いただいた方の声です。</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+          <p class="text-xs text-gray-500 mb-2 font-bold"><i class="fa-solid fa-quote-left text-brand-orange/30 text-xl mr-2"></i>短時間利用</p>
+          <p class="text-gray-700 text-sm leading-relaxed pl-2 border-l-2 border-gray-100">
+            短時間でも気軽に利用できて、店内も清潔で落ち着ける空間でした。近くに来たらまた利用したいと思います。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+          <p class="text-xs text-gray-500 mb-2 font-bold"><i class="fa-solid fa-quote-left text-brand-orange/30 text-xl mr-2"></i>初めてでも安心</p>
+          <p class="text-gray-700 text-sm leading-relaxed pl-2 border-l-2 border-gray-100">
+            初めての利用でも安心できました。店長さんの気さくな対応と、ゆったり作業できる環境が魅力です。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+          <p class="text-xs text-gray-500 mb-2 font-bold"><i class="fa-solid fa-quote-left text-brand-orange/30 text-xl mr-2"></i>Wi-Fi安定 / Web会議</p>
+          <p class="text-gray-700 text-sm leading-relaxed pl-2 border-l-2 border-gray-100">
+            飛び入り利用でも非常に快適。清潔感があり集中でき、Wi-Fiも安定。Web会議もスムーズでした。
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="https://maps.app.goo.gl/Bt3Uu14bzqJQ88e69"
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-brand-orange hover:bg-red-800 text-white font-bold px-8 py-4 rounded-full shadow-md transition transform hover:scale-105">
+          <i class="fa-brands fa-google"></i>
+          Googleのクチコミを見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities -->
+  <section class="py-20 bg-white fade-in-section">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-brand-orange font-bold tracking-widest">FACILITIES</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mt-2">設備・環境</h2>
+      </div>
+
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <!-- サンプル画像に変更 -->
+        <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80" alt="店内全体" class="rounded-2xl shadow-xl w-full h-80 md:h-[420px] object-cover hover:shadow-2xl transition duration-500">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-brand-orange/30 transition hover:bg-orange-50/20">
+            <div class="text-brand-orange text-3xl mb-3"><i class="fa-solid fa-wifi"></i></div>
+            <h3 class="font-bold text-lg mb-2">Wi-Fi & 電源</h3>
+            <p class="text-sm text-gray-600">制作・学習に必要な基本はしっかり。全席で電源が使えます。</p>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-brand-orange/30 transition hover:bg-orange-50/20">
+            <div class="text-brand-orange text-3xl mb-3"><i class="fa-solid fa-volume-low"></i></div>
+            <h3 class="font-bold text-lg mb-2">集中できる空間</h3>
+            <p class="text-sm text-gray-600">静かな集中を大切に。作業が進む空気感があります。</p>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-brand-orange/30 transition hover:bg-orange-50/20">
+            <div class="text-brand-orange text-3xl mb-3"><i class="fa-solid fa-headset"></i></div>
+            <h3 class="font-bold text-lg mb-2">通話・Web会議OK</h3>
+            <p class="text-sm text-gray-600">指定エリアおよびミーティングルームで可能です（イヤホン推奨）。</p>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-brand-orange/30 transition hover:bg-orange-50/20">
+            <div class="text-brand-orange text-3xl mb-3"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <h3 class="font-bold text-lg mb-2">ミーティングルーム</h3>
+            <p class="text-sm text-gray-600">打ち合わせや相談に。利用方法はLINEでご案内します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flow -->
+  <section id="flow" class="py-20 bg-gray-50 fade-in-section">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <span class="text-brand-orange font-bold tracking-widest">FLOW</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mt-2">初めての方へ</h2>
+        <p class="text-gray-600 mt-4">難しい手続きはありません。フラッとお立ち寄りください。</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="relative group">
+          <div class="bg-white rounded-2xl p-8 h-full border border-gray-100 shadow-sm group-hover:shadow-lg transition">
+            <div class="absolute -top-4 -left-4 bg-brand-orange text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-110 transition">1</div>
+            <h3 class="font-bold text-xl mb-4 text-brand-dark mt-2">ご来店</h3>
+            <p class="text-gray-600">新安城駅から徒歩3分。まずはお気軽にお越しください。</p>
+          </div>
+        </div>
+
+        <div class="relative group">
+          <div class="bg-white rounded-2xl p-8 h-full border border-gray-100 shadow-sm group-hover:shadow-lg transition">
+            <div class="absolute -top-4 -left-4 bg-brand-orange text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-110 transition">2</div>
+            <h3 class="font-bold text-xl mb-4 text-brand-dark mt-2">受付・ご案内</h3>
+            <p class="text-gray-600">Wi-Fi設定や店内ルールをご案内。初めてでも安心です。</p>
+          </div>
+        </div>
+
+        <div class="relative group">
+          <div class="bg-white rounded-2xl p-8 h-full border border-gray-100 shadow-sm group-hover:shadow-lg transition">
+            <div class="absolute -top-4 -left-4 bg-brand-orange text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-110 transition">3</div>
+            <h3 class="font-bold text-xl mb-4 text-brand-dark mt-2">利用開始！</h3>
+            <p class="text-gray-600">お好きな席で作業スタート。まずは30分からでもOK。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Access -->
+  <section id="access" class="py-20 bg-white fade-in-section">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row gap-12 items-center">
+      <div class="md:w-1/2">
+        <span class="text-brand-orange font-bold tracking-widest">ACCESS</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mt-2 mb-6">アクセス</h2>
+
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <i class="fa-solid fa-location-dot text-brand-orange mt-1 mr-3 w-5"></i>
+            <div>
+              <p class="font-bold">株式会社ミコシヤ Coworking（MIKOSHIYA）</p>
+              <p class="text-gray-600">愛知県安城市（新安城駅から徒歩3分）</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <i class="fa-solid fa-train text-brand-orange mt-1 mr-3 w-5"></i>
+            <div>
+              <p class="font-bold">電車でお越しの方</p>
+              <p class="text-gray-600">名鉄「新安城駅」より徒歩3分</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <i class="fa-solid fa-car text-brand-orange mt-1 mr-3 w-5"></i>
+            <div>
+              <p class="font-bold">お車でお越しの方</p>
+              <p class="text-gray-600">近隣のコインパーキングをご利用ください（提携駐車場はございません）。</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <i class="fa-regular fa-clock text-brand-orange mt-1 mr-3 w-5"></i>
+            <div>
+              <p class="font-bold">営業時間</p>
+              <p class="text-gray-600">08:00〜17:00</p>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <a href="https://maps.app.goo.gl/Bt3Uu14bzqJQ88e69" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-brand-orange hover:bg-red-800 text-white font-bold px-6 py-3 rounded-full shadow-md transition hover:shadow-lg">
+              <i class="fa-solid fa-map-location-dot"></i>
+              Googleマップを開く
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 w-full rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.3161491596675!2d137.0833777750276!3d34.98927766767558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600499e85fbea779%3A0xdeffe0fad98a182c!2z5qCq5byP5Lya56S-44Of44Kz44K344OkQ293b3JraW5nKE1JS09TSElZQSk!5e1!3m2!1sja!2sjp!4v1771385115563!5m2!1sja!2sjp"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="w-full h-80 md:h-[420px]">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-gray-50 fade-in-section">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-brand-dark">よくある質問</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group bg-white p-4 rounded-lg cursor-pointer border border-gray-100 shadow-sm transition-all duration-300 open:shadow-md open:ring-1 open:ring-brand-orange/20">
+          <summary class="flex justify-between items-center font-bold text-gray-800 list-none p-2">
+            <span>Q. 動画編集などの専門スキルがなくても利用できますか？</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
+            A. もちろんです！資格の勉強、読書、仕事の整理など、どなたでもご利用いただけます。
+          </div>
+        </details>
+
+        <details class="group bg-white p-4 rounded-lg cursor-pointer border border-gray-100 shadow-sm transition-all duration-300 open:shadow-md open:ring-1 open:ring-brand-orange/20">
+          <summary class="flex justify-between items-center font-bold text-gray-800 list-none p-2">
+            <span>Q. 見学はできますか？</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
+            A. はい、随時受け付けています。事前にLINEでご連絡いただくとスムーズです。
+          </div>
+        </details>
+
+        <details class="group bg-white p-4 rounded-lg cursor-pointer border border-gray-100 shadow-sm transition-all duration-300 open:shadow-md open:ring-1 open:ring-brand-orange/20">
+          <summary class="flex justify-between items-center font-bold text-gray-800 list-none p-2">
+            <span>Q. 店内で食事はできますか？</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
+            A. 軽食（おにぎりやサンドイッチなど）は可能です。匂いの強いものはご配慮ください。
+          </div>
+        </details>
+
+        <details class="group bg-white p-4 rounded-lg cursor-pointer border border-gray-100 shadow-sm transition-all duration-300 open:shadow-md open:ring-1 open:ring-brand-orange/20">
+          <summary class="flex justify-between items-center font-bold text-gray-800 list-none p-2">
+            <span>Q. オンライン会議をしても良いですか？</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
+            A. はい、可能です。周りの方への配慮としてイヤホンの着用をお願いしています。
+          </div>
+        </details>
+
+        <details class="group bg-white p-4 rounded-lg cursor-pointer border border-gray-100 shadow-sm transition-all duration-300 open:shadow-md open:ring-1 open:ring-brand-orange/20">
+          <summary class="flex justify-between items-center font-bold text-gray-800 list-none p-2">
+            <span>Q. 支払い方法は何がありますか？</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
+            A. 現金、クレジットカード、PayPayなどのQR決済がご利用いただけます。
+          </div>
+        </details>
+
+        <details class="group bg-white p-4 rounded-lg cursor-pointer border border-gray-100 shadow-sm transition-all duration-300 open:shadow-md open:ring-1 open:ring-brand-orange/20">
+          <summary class="flex justify-between items-center font-bold text-gray-800 list-none p-2">
+            <span>Q. 駐車場はありますか？</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-brand-orange"><i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div class="text-gray-600 mt-2 p-2 leading-relaxed border-t border-gray-100">
+            A. 専用駐車場はございません。近隣のコインパーキングをご利用ください。
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <footer id="contact" class="bg-brand-dark text-white pt-20 pb-10">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">お問い合わせ</h2>
+      <p class="text-gray-400 mb-8 max-w-xl mx-auto">
+        ご質問、見学の予約、利用申し込みは公式LINEから受け付けています。<br>
+        「こんな使い方はできる？」「今日の空き状況は？」など、お気軽にメッセージをください。
+      </p>
+
+      <a href="https://lin.ee/MV1fpHH" target="_blank" rel="noopener"
+         class="inline-block bg-green-500 hover:bg-green-600 text-white text-xl font-bold px-10 py-5 rounded-full shadow-lg transform hover:scale-105 transition mb-12">
+        <i class="fa-brands fa-line mr-2 text-2xl"></i>
+        LINEで友だち追加・相談する
+      </a>
+
+      <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div class="mb-4 md:mb-0">
+          <span class="font-bold text-white text-lg tracking-wider mr-4">MIKOSHIYA</span>
+          <span>物語が生まれる制作基地</span>
+        </div>
+        <div>&copy; MIKOSHIYA All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <div class="fixed bottom-4 right-4 md:hidden z-40">
+    <a href="https://lin.ee/MV1fpHH" target="_blank" rel="noopener"
+       class="bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl animate-pulse hover:scale-110 transition">
+      <i class="fa-brands fa-line text-3xl"></i>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in-section').forEach(section => observer.observe(section));
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('shadow-md');
+        header.classList.replace('bg-white/95', 'bg-white');
+      } else {
+        header.classList.remove('shadow-md');
+        header.classList.replace('bg-white', 'bg-white/95');
+      }
+    });
+  </script>
+</body>
+</html>
